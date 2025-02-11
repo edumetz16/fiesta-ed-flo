@@ -1,11 +1,12 @@
 'use client';
-import { useState } from "react"
+import { MouseEvent, useState } from "react"
 import { Button } from "./ui/button"
 import { Card } from "./ui/card";
 
 export const ConfirmAssistance = () => {
   const [showConfirm, setShowConfirm] = useState(false);
-  const answer = (event: Event,response: boolean) => {
+  const answer = (event: MouseEvent,response: boolean) => {
+    console.log(response);
     event.stopPropagation();
   }
   return(
@@ -19,8 +20,8 @@ export const ConfirmAssistance = () => {
         <p>¿Vas a venir a la fiesta?</p>
         <div className="flex gap-4">
 
-        <Button onClick={(e)=>{answer(e,true)}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">Sí, voy a ir</Button>
-        <Button onClick={(e)=>{answer(e,true)}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">No, no voy a ir</Button>
+        <Button onClick={(e: MouseEvent<HTMLButtonElement>)=>{answer(e,true)}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">Sí, voy a ir</Button>
+        <Button onClick={(e: MouseEvent<HTMLButtonElement>)=>{answer(e,true)}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">No, no voy a ir</Button>
         </div>
       </Card>
     </div>}

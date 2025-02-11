@@ -3,7 +3,6 @@
 import { BaseSyntheticEvent, ChangeEvent, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { toast } from "sonner"
 import Image from "next/image"
 import { Card } from "./ui/card"
 import { Music } from "lucide-react"
@@ -11,18 +10,10 @@ import { Music } from "lucide-react"
 export default function SpotifyPlaylist() {
   const input = useRef<HTMLInputElement>(null);
   const [addResponse, setAddResponse] = useState<'' | 'success' | 'failure'>('');
-  const [songUrl, setSongUrl] = useState("");
   const [track, setTrack] = useState<{id: string, name: string, artist:string, image: string} | null>(null);
   const [showResults, setShowResults] = useState(false)
   const [results, setResults] = useState<{id: string, name: string, artist:string, image: string, uri: string}[]>([]);
   
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    // Here you would typically handle the song submission
-    // For demo purposes, we'll just show a success message
-    toast.success("Song suggestion received! Thank you!")
-    setSongUrl("")
-  }
 
   const searchSongs = async (e: ChangeEvent<HTMLInputElement>) => {
     if(e.target.value.length >2) {
@@ -58,6 +49,7 @@ export default function SpotifyPlaylist() {
       }
       
     } catch (error) {
+      console.log(error);
       setAddResponse('failure');
     }
   }
@@ -102,7 +94,7 @@ export default function SpotifyPlaylist() {
         allow="encrypted-media"
         className="rounded-lg"
       />
-      <form onSubmit={handleSubmit} className="space-y-4 relative">
+      <form className="space-y-4 relative">
         <Input
           type="search"
           placeholder="Paste Spotify song link here"
@@ -140,8 +132,8 @@ export default function SpotifyPlaylist() {
             <p>¿Querés agregar {track.name} a la playlist?</p>
             <div className="flex gap-4">
 
-            <Button onClick={(e)=>{addToPlaylist()}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">Sí, ¡Con este tema la rompo!</Button>
-            <Button onClick={(e)=>{dismiss()}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">No, al final no</Button>
+            <Button onClick={()=>{addToPlaylist()}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">Sí, ¡Con este tema la rompo!</Button>
+            <Button onClick={()=>{dismiss()}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">No, al final no</Button>
             </div>
           </Card>
         </div>}
@@ -153,8 +145,8 @@ export default function SpotifyPlaylist() {
             {addResponse === 'failure' && <p>Edu se mandó alguna cagada, avisale!</p>}
             <div className="flex gap-4">
 
-            <Button onClick={(e)=>{addToPlaylist()}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">Sí, ¡Con este tema la rompo!</Button>
-            <Button onClick={(e)=>{dismiss()}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">No, al final no</Button>
+            <Button onClick={()=>{addToPlaylist()}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">Sí, ¡Con este tema la rompo!</Button>
+            <Button onClick={()=>{dismiss()}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">No, al final no</Button>
             </div>
           </Card>
         </div>}

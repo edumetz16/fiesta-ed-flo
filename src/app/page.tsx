@@ -1,11 +1,9 @@
 import Image from "next/image"
 import { Card } from "@/components/ui/card"
-import { MapPin, Calendar, Clock, Music, Gift } from "lucide-react"
+import { MapPin, Calendar, Clock, Gift } from "lucide-react"
 import SpotifyPlaylist from "@/components/spotify-playlist"
 import GiftSection from "@/components/gift-section"
-import Link from "next/link"
 import { CalendarButton } from "@/components/calendar-button"
-import { Button } from "@/components/ui/button"
 import { ConfirmAssistance } from "@/components/confirm-assistance"
 
 export default function Page() {
@@ -130,7 +128,7 @@ Queremos que nada te impida bailar y pasarlo lo mejor posible.
               <Gift className="w-12 h-12 mx-auto text-[#2C3639]" />
               <h2 className="text-3xl md:text-4xl font-bold text-[#2C3639]">Wedding Gift</h2>
               <p className="text-lg text-[#2C3639]/80">
-                Your presence is our present! However, if you'd like to contribute to our future together, we'd be
+                Your presence is our present! However, if you&apos;d like to contribute to our future together, we&apos;d be
                 honored.
               </p>
             </div>
