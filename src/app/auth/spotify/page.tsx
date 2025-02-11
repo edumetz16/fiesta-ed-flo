@@ -1,9 +1,9 @@
 'use client'
 
 import { useSearchParams } from "next/navigation"
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 
-export default function AuthLayout() {
+const AuthComponent = () =>  {
   const p = useSearchParams();
   useEffect(() => {
     const saveCode = async () => {
@@ -22,4 +22,8 @@ export default function AuthLayout() {
   }, [p]);
 
   return <></>
+}
+
+export default function AuthPage() {
+  return <Suspense><AuthComponent /></Suspense>
 }
