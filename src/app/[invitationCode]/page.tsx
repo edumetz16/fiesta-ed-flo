@@ -5,14 +5,23 @@ import SpotifyPlaylist from "@/components/spotify-playlist"
 import GiftSection from "@/components/gift-section"
 import { CalendarButton } from "@/components/calendar-button"
 import { ConfirmAssistance } from "@/components/confirm-assistance"
+import { TR } from "@/components/typewriter"
+import { get } from "@vercel/edge-config"
+import { Invitee } from "../shared/interfaces"
 
-export default function Page() {
+export default async function Page({params}: {params: Promise<{invitationCode: string}>}) {
+  const {invitationCode} = await params;
+  const invitee =  await get(`invitee${invitationCode}`) as Invitee;
+  if(!invitee?.name) return <></>;
   return (
     <main className="min-h-screen bg-[#FDF6EC]">
       {/* Hero Section */}
       <section className="container px-4 py-12 md:py-24">
         <div className="text-center mt-12 mb-24 md:mb-48 space-y-4 mx-auto w-fit">
-          <h1 className="text-5xl md:text-8xl font-light text-[#2C3639] max-w-screen-md text-center">TE INVITAMOS A NUESTRA CELEBRACIÓN</h1>
+        
+          <h1 className="text-5xl md:text-8xl font-light text-[#2C3639] max-w-screen-md text-center">
+            <TR invitee={invitee}/>
+          </h1>
         </div>
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           <div className="space-y-4">
@@ -31,7 +40,7 @@ export default function Page() {
 
       {/* About Section */}
       <section className="container px-4 py-12 md:py-24">
-        <h2 className="text-5xl lg:text-6xl text-center text-[#2C3639] max-w-screen-md mx-auto">Nos encantaría que nos acompañaras este día</h2>
+        <h2 className="text-5xl lg:text-6xl text-center text-[#2C3639] max-w-screen-md mx-auto">Nos encantaría que nos acompañaran este día</h2>
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-start mt-12 lg:mt-24">
               <div className="relative aspect-square rounded-2xl overflow-hidden">
                 <Image
@@ -44,9 +53,9 @@ export default function Page() {
             <div className="space-y-4 lg:pl-24 relative h-full">
               <h2 className="text-3xl md:text-5xl text-left text-[#2C3639]">Dress code casual elegante</h2>
               <p className="text-2xl md:text-3xl !leading-loose max-w-2xs  font-thin">
-              Nuestra idea es que estén cómod@s, que nadie tenga frío, que a nadie le duelan los pies, así que venite con ropa con la que vos te sientas bien y no te resulte molesto.
+              Nuestra idea es que estén cómod@s, que nadie tenga frío, que a nadie le duelan los pies, así que vénganse con ropa con la que se sientan bien y no les resulte molesto.
 
-Queremos que nada te impida bailar y pasarlo lo mejor posible.
+Queremos que nada les impida bailar y pasarlo lo mejor posible.
               </p>
               <div className="relative lg:absolute lg:w-[360px] xl:w-[600px] aspect-video rounded-2xl overflow-hidden lg:-left-[360px] xl:-left-[120px] lg:-bottom-[50px] xl:-bottom-[200px]">
                 <Image
@@ -96,7 +105,7 @@ Queremos que nada te impida bailar y pasarlo lo mejor posible.
         </div>
         <div className="block text-center mt-10">
           
-          <ConfirmAssistance />
+          <ConfirmAssistance code={invitationCode} invitee={invitee} />
 
           </div>
         <div className="mt-12">
@@ -117,7 +126,7 @@ Queremos que nada te impida bailar y pasarlo lo mejor posible.
 
       {/* Music Section */}
       <section className="container px-4 py-24 md:py-32 relative">
-        <SpotifyPlaylist />
+        <SpotifyPlaylist invitee={invitee}/>
       </section>
 
       {/* Gift Section */}
