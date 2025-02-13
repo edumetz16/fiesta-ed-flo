@@ -1,6 +1,6 @@
 'use client'
 import { Invitee } from "@/app/shared/interfaces";
-import Typewriter, { TypewriterClass } from 'typewriter-effect';
+import Typewriter from 'typewriter-effect';
 
 export const TR = ({invitee}: {invitee: Invitee}) => {
   return (
