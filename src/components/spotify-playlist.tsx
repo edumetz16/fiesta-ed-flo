@@ -49,7 +49,10 @@ export default function SpotifyPlaylist({invitee}: {invitee: Invitee}) {
         setTrack(null);
         setResults([]);
         if(input.current) input.current.value = '';
-        if(iframe.current) iframe.current.src = iframe.current.src;
+        if(iframe.current) {
+          const url = new URL(iframe.current.src);
+          iframe.current.src = `${url.protocol}//${url.hostname}${url.pathname}?cb=${new Date().getTime()}`;
+        };
       } else {
         setAddResponse('failure');
       }

@@ -30,7 +30,7 @@ export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invi
   }
   return(
     <>
-    <Button onClick={()=>{setShowConfirm(true)}} className="min-w-96 max-w-scren w-full md:w-auto bg-[#2C3639] hover:bg-[#2C3639]/90 text-2xl">
+    <Button onClick={()=>{setShowConfirm(true)}} className="md:min-w-96 max-w-scren w-full md:w-auto bg-[#2C3639] hover:bg-[#2C3639]/90 text-2xl">
             Confirmar asistencia
           </Button>
     {showConfirm && <div onClick={()=>{setShowConfirm(false)}} className="top-0 left-0 z-50 fixed bg-black/50 w-screen h-screen flex items-center justify-center">

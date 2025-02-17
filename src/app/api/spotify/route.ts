@@ -21,7 +21,7 @@ export const POST = async (req: NextRequest) => {
     let i = 0;
     let itemAlreadyExists; let total=0;
     do {
-      playlistItems = (await sdk.playlists.getPlaylistItems(process.env.NEXT_PUBLIC_SPOTIFY_PLAYLIST_ID!, undefined, undefined, 10 ,i));
+      playlistItems = (await sdk.playlists.getPlaylistItems(process.env.NEXT_PUBLIC_SPOTIFY_PLAYLIST_ID!, undefined, undefined, undefined ,i));
       total = playlistItems.total;
       i = i + playlistItems.items.length - 1;
       itemAlreadyExists = playlistItems.items.some((item) => item.track.uri === body.track.uri);

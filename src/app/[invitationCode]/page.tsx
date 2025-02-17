@@ -11,7 +11,8 @@ import { Invitee } from "../shared/interfaces"
 
 export default async function Page({params}: {params: Promise<{invitationCode: string}>}) {
   const {invitationCode} = await params;
-  const invitee =  await get(`invitee${invitationCode}`) as Invitee;
+  const invitees = await get('invitees') as Invitee[];
+  const invitee =  await invitees.find((i) => i.code === invitationCode);
   if(!invitee?.name) return <></>;
   return (
     <main className="min-h-screen bg-[#FDF6EC]">
@@ -135,10 +136,9 @@ Queremos que nada les impida bailar y pasarlo lo mejor posible.
           <div className="space-y-8 text-center">
             <div className="space-y-4">
               <Gift className="w-12 h-12 mx-auto text-[#2C3639]" />
-              <h2 className="text-3xl md:text-4xl font-bold text-[#2C3639]">Wedding Gift</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-[#2C3639]">Por último...</h2>
               <p className="text-lg text-[#2C3639]/80">
-                Your presence is our present! However, if you&apos;d like to contribute to our future together, we&apos;d be
-                honored.
+                Nuestro regalo es que compartas este día con nosotros, pero si tenés ganas de contribuir con algo más, estos son los datos:
               </p>
             </div>
             <GiftSection />

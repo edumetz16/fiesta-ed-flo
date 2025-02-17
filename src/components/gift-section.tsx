@@ -7,8 +7,8 @@ import { toast } from "sonner"
 export default function GiftSection() {
   const bankDetails = {
     accountName: "Edu & Floppy",
-    iban: "ES00 0000 0000 0000 0000 0000",
-    swift: "XXXXX",
+    cbu: "0720203488000036654204",
+    alias: "Shanlymetzgers",
   }
 
   const copyToClipboard = (text: string) => {
@@ -20,30 +20,42 @@ export default function GiftSection() {
     <Card className="max-w-md mx-auto p-6 bg-white">
       <div className="space-y-4">
         <div className="space-y-2">
-          <p className="font-medium">Account Name</p>
-          <div className="flex items-center justify-between gap-2">
-            <p className="text-sm text-muted-foreground">{bankDetails.accountName}</p>
+          <p className="text-xl font-bold">Cuenta corriente ($ o U$S)</p>
+          {/* <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+            <p className="text-lg text-muted-foreground">{bankDetails.accountName}</p>
             <Button variant="ghost" size="icon" onClick={() => copyToClipboard(bankDetails.accountName)}>
               <Copy className="h-4 w-4" />
             </Button>
+          </div> */}
+        </div>
+        <div className="space-y-2">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div>
+
+            <p className="font-medium">Alias</p>
+            </div>
+            <div className="flex">
+            <p className="text-lg text-muted-foreground">{bankDetails.alias}</p>
+            <Button variant="ghost" size="icon" onClick={() => copyToClipboard(bankDetails.alias)}>
+              <Copy className="h-4 w-4" />
+            </Button>
+
+            </div>
           </div>
         </div>
         <div className="space-y-2">
-          <p className="font-medium">IBAN</p>
-          <div className="flex items-center justify-between gap-2">
-            <p className="text-sm text-muted-foreground">{bankDetails.iban}</p>
-            <Button variant="ghost" size="icon" onClick={() => copyToClipboard(bankDetails.iban)}>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div>
+
+          <p className="font-medium">CBU</p>
+            </div>
+            <div className="flex">
+
+            <p className="text-lg text-muted-foreground">{bankDetails.cbu}</p>
+            <Button variant="ghost" size="icon" onClick={() => copyToClipboard(bankDetails.cbu)}>
               <Copy className="h-4 w-4" />
             </Button>
-          </div>
-        </div>
-        <div className="space-y-2">
-          <p className="font-medium">SWIFT/BIC</p>
-          <div className="flex items-center justify-between gap-2">
-            <p className="text-sm text-muted-foreground">{bankDetails.swift}</p>
-            <Button variant="ghost" size="icon" onClick={() => copyToClipboard(bankDetails.swift)}>
-              <Copy className="h-4 w-4" />
-            </Button>
+            </div>
           </div>
         </div>
       </div>
