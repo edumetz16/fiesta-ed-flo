@@ -8,7 +8,10 @@ export const getItem = async (key: string) => {
 
 export const setItem = async (key: string, value: EdgeConfigValue, merge = true) => {
   const currentValue = await getItem(key);
-  if(typeof currentValue === 'object' && typeof value === 'object' && merge) {
+  if (Array.isArray(value)) {
+    console.log('value is an array, override')
+  }
+  else if(typeof currentValue === 'object' && typeof value === 'object' && merge) {
     value = {
       ...currentValue,
       ...value
