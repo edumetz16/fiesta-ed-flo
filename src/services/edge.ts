@@ -17,7 +17,6 @@ export const setItem = async (key: string, value: EdgeConfigValue, merge = true)
       ...value
     }
   }
-  console.log(value);
   try {
     const updateEdgeConfig = await fetch(
       'https://api.vercel.com/v1/edge-config/ecfg_w3dhtnxl5vin0wuj7e1gaepre6v9/items',
