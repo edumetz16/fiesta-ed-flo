@@ -8,6 +8,7 @@ import { sendGTMEvent } from "@next/third-parties/google";
 export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invitee}) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [confirmResponse, setConfirmResponse] = useState('');
+  const [showConfirmResponse, setShowConfirmResponse] = useState(false);
   const [confirmQuantity, setConfirmQuantity] = useState(invitee.quantity);
   const answer = async (event: MouseEvent, assists: boolean, quantity?: number) => {
     setConfirmQuantity(quantity || invitee.quantity);
@@ -23,6 +24,7 @@ export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invi
       sendGTMEvent({event: 'assist', code, assists, quantity: quantity || invitee.quantity});
       const data = await response.json();
       setConfirmResponse(data.assists ? 'assists':'no-assists');
+      setShowConfirmResponse(true);
     } catch (error) {
       console.log(error);
       setConfirmResponse('error');
@@ -33,8 +35,10 @@ export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invi
   return(
     <>
     <Button onClick={()=>{setShowConfirm(true)}} className="md:min-w-96 max-w-scren w-full md:w-auto bg-[#2C3639] hover:bg-[#2C3639]/90 text-2xl">
-            <span role="img">🎉</span>Confirmar asistencia
-          </Button>
+            {confirmResponse === 'no-assists' ? <span role="img">😔</span> : <span role="img">🎉</span>}{confirmResponse === '' && 'Confirmar asistencia'}
+            {confirmResponse === 'assists' && '¡Te esperamos!'}
+            {confirmResponse === 'no-assists' && 'Qué lástima que no puedas venir'}
+    </Button>
     {showConfirm && <div onClick={()=>{setShowConfirm(false)}} className="top-0 left-0 z-50 fixed bg-black/50 w-screen h-screen flex items-center justify-center">
       <Card className="px-10 py-4 flex flex-col gap-6">
         <h1>Confirmar asistencia</h1>
@@ -47,7 +51,7 @@ export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invi
         </div>
       </Card>
     </div>}
-    {confirmResponse && <div onClick={()=>{setConfirmResponse('')}} className="top-0 left-0 z-50 fixed bg-black/50 w-screen h-screen flex items-center justify-center">
+    {confirmResponse && showConfirmResponse && <div onClick={()=>{setShowConfirmResponse(false)}} className="top-0 left-0 z-50 fixed bg-black/50 w-screen h-screen flex items-center justify-center">
       <Card className="px-10 py-4 flex flex-col gap-6">
         {confirmResponse === 'error' && <h1>¡Ups! Algo salió mal</h1>}
         {confirmResponse === 'error' && <p>No pudimos confirmar tu asistencia, volve a confirmar</p>}
