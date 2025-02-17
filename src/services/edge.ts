@@ -8,8 +8,7 @@ export const getItem = async (key: string) => {
 
 export const setItem = async (key: string, value: EdgeConfigValue, merge = true) => {
   const currentValue = await getItem(key);
-  if(Array.isArray(currentValue)) {  }
-  else if(typeof currentValue === 'object' && typeof value === 'object' && merge) {
+  if(typeof currentValue === 'object' && typeof value === 'object' && merge) {
     value = {
       ...currentValue,
       ...value

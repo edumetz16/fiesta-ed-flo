@@ -37,7 +37,7 @@ export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invi
     <Button onClick={()=>{setShowConfirm(true)}} className="md:min-w-96 max-w-scren w-full md:w-auto bg-[#2C3639] hover:bg-[#2C3639]/90 text-2xl">
             {confirmResponse === 'no-assists' ? <span role="img">😔</span> : <span role="img">🎉</span>}{confirmResponse === '' && 'Confirmar asistencia'}
             {confirmResponse === 'assists' && '¡Te esperamos!'}
-            {confirmResponse === 'no-assists' && 'Qué lástima que no puedas venir'}
+            {confirmResponse === 'no-assists' && 'Que lástima que no puedas venir'}
     </Button>
     {showConfirm && <div onClick={()=>{setShowConfirm(false)}} className="top-0 left-0 z-50 fixed bg-black/50 w-screen h-screen flex items-center justify-center">
       <Card className="px-10 py-4 flex flex-col gap-6">
