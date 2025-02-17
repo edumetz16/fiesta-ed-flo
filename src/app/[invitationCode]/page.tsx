@@ -8,6 +8,7 @@ import { ConfirmAssistance } from "@/components/confirm-assistance"
 import { TR } from "@/components/typewriter"
 import { get } from "@vercel/edge-config"
 import { Invitee } from "../shared/interfaces"
+import { DressCodeButton } from "@/components/image-slideshow"
 
 export default async function Page({params}: {params: Promise<{invitationCode: string}>}) {
   const {invitationCode} = await params;
@@ -27,7 +28,7 @@ export default async function Page({params}: {params: Promise<{invitationCode: s
         <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
           <div className="space-y-4">
             {/* <AnimatedImage src="/foto_nieve.jpg" alt="Edu" wrapperClass="relative w-full aspect-[4/5] rounded-2xl overflow-hidden" /> */}
-            <div className="relative w-full aspect-square md:aspect-[4/5] rounded-2xl overflow-hidden -translate-y-24 ">
+            <div className="relative w-full aspect-square md:aspect-[4/5] rounded-2xl overflow-hidden lg:-translate-y-24 ">
               <Image src="/foto_nieve.jpg" alt="Edu" fill className="object-cover" priority />
             </div>
           </div>
@@ -51,13 +52,14 @@ export default async function Page({params}: {params: Promise<{invitationCode: s
                   className="object-cover object-bottom"
                 />
               </div>
-            <div className="space-y-4 lg:pl-24 relative h-full">
+            <div className="space-y-4 relative h-full">
               <h2 className="text-3xl md:text-5xl text-left text-[#2C3639]">Dress code casual elegante</h2>
               <p className="text-2xl md:text-3xl !leading-loose max-w-2xs  font-thin">
               Nuestra idea es que estén cómod@s, que nadie tenga frío, que a nadie le duelan los pies, así que vénganse con ropa con la que se sientan bien y no les resulte molesto.
 
 Queremos que nada les impida bailar y pasarlo lo mejor posible.
               </p>
+              <DressCodeButton />
               <div className="relative lg:absolute lg:w-[360px] xl:w-[600px] aspect-video rounded-2xl overflow-hidden lg:-left-[360px] xl:-left-[120px] lg:-bottom-[50px] xl:-bottom-[200px]">
                 <Image
                   src="/peques.jpeg"
