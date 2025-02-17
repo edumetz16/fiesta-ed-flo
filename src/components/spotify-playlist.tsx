@@ -7,6 +7,7 @@ import Image from "next/image"
 import { Card } from "./ui/card"
 import { Music } from "lucide-react"
 import { Invitee } from "@/app/shared/interfaces"
+import { sendGTMEvent } from "@next/third-parties/google"
 
 export default function SpotifyPlaylist({invitee}: {invitee: Invitee}) {
   const input = useRef<HTMLInputElement>(null);
@@ -45,6 +46,7 @@ export default function SpotifyPlaylist({invitee}: {invitee: Invitee}) {
       });
       const data = await response.json();
       if(data.success) {
+        sendGTMEvent({event: 'add-song', track: track?.name, code: invitee.code});
         setAddResponse('success');
         setTrack(null);
         setResults([]);

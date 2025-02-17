@@ -78,7 +78,7 @@ function ImageSlideshow({
               src={`/dresscode/dc${index+1}.jpg`}
               alt={`Dress code ${index+1}.jpg`}
               fill
-              className="object-cover"
+              className="object-contain"
               priority={index === 0}
             />
           </div>

@@ -15,6 +15,7 @@ export default async function Page({params}: {params: Promise<{invitationCode: s
   const invitees = await get('invitees') as Invitee[];
   const invitee =  await invitees.find((i) => i.code === invitationCode);
   if(!invitee?.name) return <></>;
+
   return (
     <main className="min-h-screen bg-[#FDF6EC]">
       {/* Hero Section */}
@@ -73,7 +74,7 @@ Queremos que nada les impida bailar y pasarlo lo mejor posible.
       </section>
 
       {/* Event Details Section */}
-      <section className="container px-4 py-24 md:py-32 relative">
+      <section className="container px-4 py-12 md:py-16 md:mt-16 relative">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <Card className="p-6 bg-white/80 backdrop-blur">
             <div className="space-y-4 text-center">
@@ -128,12 +129,12 @@ Queremos que nada les impida bailar y pasarlo lo mejor posible.
       </section>
 
       {/* Music Section */}
-      <section className="container px-4 py-24 md:py-32 relative">
+      <section className="container px-4 py-12 md:py-12 relative">
         <SpotifyPlaylist invitee={invitee}/>
       </section>
 
       {/* Gift Section */}
-      <section className="container px-4 py-24 md:py-32">
+      <section className="container px-4 py-12 md:py-12">
         <Card className="p-6 md:p-12 bg-white/80 backdrop-blur">
           <div className="space-y-8 text-center">
             <div className="space-y-4">

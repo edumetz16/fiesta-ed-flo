@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
+import { GoogleTagManager } from '@next/third-parties/google'
 
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -20,6 +21,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+            <GoogleTagManager gtmId={process.env.NEXT_PUBLIC_GTM_ID!} />
+
       <body
         className={`${cormorantGaramond.className} antialiased`}
       >
