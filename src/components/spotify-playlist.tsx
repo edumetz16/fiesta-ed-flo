@@ -94,7 +94,7 @@ export default function SpotifyPlaylist({invitee}: {invitee: Invitee}) {
               <Music className="w-12 h-12 mx-auto text-[#2C3639]" />
               <h2 className="text-3xl md:text-4xl font-bold text-[#2C3639]">Ayudanos a crear la playlist</h2>
               <p className="text-lg text-[#2C3639]/80">
-                Agregá las canciones que te gustaría escuchar en la fiesta.
+              Agregá las canciones que no pueden faltar en nuestro festejo
               </p>
             </div>
             <div className="max-w-md mx-auto space-y-4">

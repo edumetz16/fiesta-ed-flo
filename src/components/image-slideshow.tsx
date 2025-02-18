@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Card } from "./ui/card"
+import { Invitee } from "@/app/shared/interfaces"
 
 interface SlideshowProps {
   images: number[]
@@ -13,7 +14,7 @@ interface SlideshowProps {
   className?: string
 }
 const images = Array.from({ length: 16 }, (_, index) => (index));
-export function DressCodeButton() {
+export function DressCodeButton({invitee}: {invitee: Invitee}) {
   const [showSlideShow, setShowSlideShow] = useState(false)
   return (
     <>
@@ -22,7 +23,7 @@ export function DressCodeButton() {
         className="md:min-w-96 max-w-scren w-full md:w-auto bg-[#2C3639] hover:bg-[#2C3639]/90 text-2xl"
         onClick={() => setShowSlideShow((show) => !show)}
       >
-        <span role="img">🤔</span> Algunas ideas
+        <span role="img">{invitee.gender === 'female' ? '👗':'👔'}</span> Algunas ideas
       </Button>
       {showSlideShow && (
         <div onClick={()=>{setShowSlideShow(false)}} className="-top-4 left-0 z-50 fixed bg-black/50 w-screen h-screen flex items-center justify-center">

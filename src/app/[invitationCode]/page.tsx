@@ -20,9 +20,9 @@ export default async function Page({params}: {params: Promise<{invitationCode: s
     <main className="min-h-screen bg-[#FDF6EC]">
       {/* Hero Section */}
       <section className="container px-4 py-12 md:py-24">
-        <div className="text-center mt-12 mb-24 md:mb-48 space-y-4 mx-auto w-fit">
+        <div className="text-center mt-12 mb-12 lg:mb-48 space-y-4 mx-auto w-fit">
         
-          <h1 className="text-5xl md:text-8xl font-light text-[#2C3639] max-w-screen-md text-center">
+          <h1 className="text-5xl md:text-8xl font-light text-[#2C3639] max-w-screen-md text-center min-h-36 sm:min-h-24 md:min-h-72 lg:min-h-48">
             <TR invitee={invitee}/>
           </h1>
         </div>
@@ -43,7 +43,7 @@ export default async function Page({params}: {params: Promise<{invitationCode: s
 
       {/* About Section */}
       <section className="container px-4 py-12 md:py-24">
-        <h2 className="text-5xl lg:text-6xl text-center text-[#2C3639] max-w-screen-md mx-auto">Nos encantaría que nos acompañaran este día</h2>
+        <h2 className="text-5xl lg:text-6xl text-center text-[#2C3639] max-w-screen-md mx-auto">Nos encantaría que nos acompañara{invitee.quantity>1?'n':'s'} este día</h2>
           <div className="grid gap-6 lg:grid-cols-2 lg:gap-12 items-start mt-12 lg:mt-24">
               <div className="relative aspect-square rounded-2xl overflow-hidden">
                 <Image
@@ -53,14 +53,14 @@ export default async function Page({params}: {params: Promise<{invitationCode: s
                   className="object-cover object-bottom"
                 />
               </div>
-            <div className="space-y-4 relative h-full">
-              <h2 className="text-3xl md:text-5xl text-left text-[#2C3639]">Dress code casual elegante</h2>
-              <p className="text-2xl md:text-3xl !leading-loose max-w-2xs  font-thin">
-              Nuestra idea es que estén cómod@s, que nadie tenga frío, que a nadie le duelan los pies, así que vénganse con ropa con la que se sientan bien y no les resulte molesto.
+            <div className="space-y-4 relative h-full pl-8">
+              <h2 className="text-2xl md:text-4xl text-left text-[#2C3639]">Dress code casual elegante</h2>
+              <p className="text-xl md:text-2xl !leading-loose max-w-2xs  font-thin">
+              Nuestra idea es que {invitee.quantity>1?'se sientan cómod@s':invitee.gender==='male'?'te sientas cómodo':invitee.gender==='female'?'te sientas cómoda':'te sientas cómod@'} para disfrutar de este festejo al máximo. No queremos que nadie tenga frío ni que le duelan los pies, así que {invitee.quantity>1?'vengan':'venite'} con ropa cómoda y a gusto que {invitee.quantity>1?'les':'te'} permita {invitee.quantity>1?'moverse':'moverte'} y bailar sin preocupaciones.
 
-Queremos que nada les impida bailar y pasarlo lo mejor posible.
+              Lo que más queremos es que pasemos juntos un momento increíble.
               </p>
-              <DressCodeButton />
+              <DressCodeButton invitee={invitee} />
               <div className="relative lg:absolute lg:w-[360px] xl:w-[600px] aspect-video rounded-2xl overflow-hidden lg:-left-[360px] xl:-left-[120px] lg:-bottom-[50px] xl:-bottom-[200px]">
                 <Image
                   src="/peques.jpeg"
@@ -127,27 +127,26 @@ Queremos que nada les impida bailar y pasarlo lo mejor posible.
           </Card>
         </div>
       </section>
-
-      {/* Music Section */}
-      <section className="container px-4 py-12 md:py-12 relative">
-        <SpotifyPlaylist invitee={invitee}/>
-      </section>
-
       {/* Gift Section */}
       <section className="container px-4 py-12 md:py-12">
         <Card className="p-6 md:p-12 bg-white/80 backdrop-blur">
           <div className="space-y-8 text-center">
             <div className="space-y-4">
               <Gift className="w-12 h-12 mx-auto text-[#2C3639]" />
-              <h2 className="text-3xl md:text-4xl font-bold text-[#2C3639]">Por último...</h2>
-              <p className="text-lg text-[#2C3639]/80">
-                Nuestro regalo es que compartas este día con nosotros, pero si tenés ganas de contribuir con algo más, estos son los datos:
+              <p className="text-xl text-[#2C3639]/80 max-w-xl mx-auto">
+                Nuestro mayor regalo es que {invitee.quantity>1?'compartan':'compartas'} este día con nosotros, pero si {invitee.quantity>1?'les':'te'} gustaría de contribuir con algo más, acá {invitee.quantity>1?'les':'te'} dejamos los datos:
               </p>
             </div>
             <GiftSection />
           </div>
         </Card>
       </section>
+
+      {/* Music Section */}
+      <section className="container px-4 py-12 md:py-12 relative">
+        <SpotifyPlaylist invitee={invitee}/>
+      </section>
+
     </main>
   )
 }

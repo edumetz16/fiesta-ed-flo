@@ -35,7 +35,7 @@ export default function GiftSection() {
             <p className="font-medium">Alias</p>
             </div>
             <div className="flex">
-            <p className="text-lg text-muted-foreground">{bankDetails.alias}</p>
+            <p className="text-xl text-muted-foreground">{bankDetails.alias}</p>
             <Button variant="ghost" size="icon" onClick={() => copyToClipboard(bankDetails.alias)}>
               <Copy className="h-4 w-4" />
             </Button>
@@ -51,7 +51,7 @@ export default function GiftSection() {
             </div>
             <div className="flex">
 
-            <p className="text-lg text-muted-foreground">{bankDetails.cbu}</p>
+            <p className="text-xl text-muted-foreground">{bankDetails.cbu}</p>
             <Button variant="ghost" size="icon" onClick={() => copyToClipboard(bankDetails.cbu)}>
               <Copy className="h-4 w-4" />
             </Button>
