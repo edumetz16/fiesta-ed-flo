@@ -10,7 +10,9 @@ export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invi
   const [confirmResponse, setConfirmResponse] = useState('');
   const [showConfirmResponse, setShowConfirmResponse] = useState(false);
   const [confirmQuantity, setConfirmQuantity] = useState(invitee.quantity);
+  const [confirmStatus, setConfirmStatus] = useState('');
   const answer = async (event: MouseEvent, assists: boolean, quantity?: number) => {
+    setConfirmStatus('loading');
     setConfirmQuantity(quantity || invitee.quantity);
     event.stopPropagation();
     try {
@@ -30,6 +32,7 @@ export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invi
     } finally {
       sendGTMEvent({event: 'assist', code, assists, quantity: quantity || invitee.quantity});
       setShowConfirm(false);
+      setConfirmStatus('');
     }
   }
   return(
@@ -41,14 +44,15 @@ export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invi
     </Button>
     {showConfirm && <div onClick={()=>{setShowConfirm(false)}} className="top-0 left-0 z-50 fixed bg-black/50 w-screen h-screen flex items-center justify-center">
       <Card className="px-10 py-4 flex flex-col gap-6">
+        {confirmStatus === 'loading' && <p>Enviando tu respuesta...</p>}
+        {!confirmStatus && <>
         <h1>Confirmar asistencia</h1>
         <p>¿Vas a venir a la fiesta?</p>
         <div className="flex gap-4">
-
         <Button onClick={(e: MouseEvent<HTMLButtonElement>)=>{answer(e,true)}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">Sí, {invitee.quantity > 1 ? `Vamos` : `Voy`}</Button>
         {invitee.quantity === 2 && <Button onClick={(e: MouseEvent<HTMLButtonElement>)=>{answer(e,true, 1)}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">Sí, Voy sol{invitee.gender === 'male' ? 'o' : invitee.gender === 'female' ? 'a' : '@'}</Button>}
         <Button onClick={(e: MouseEvent<HTMLButtonElement>)=>{answer(e,false)}} className="bg-[#2C3639] hover:bg-[#2C3639]/90">No, {invitee?.quantity>1?'Nos la perdemos':'Me la pierdo'}</Button>
-        </div>
+        </div></>}
       </Card>
     </div>}
     {confirmResponse && showConfirmResponse && <div onClick={()=>{setShowConfirmResponse(false)}} className="top-0 left-0 z-50 fixed bg-black/50 w-screen h-screen flex items-center justify-center">
