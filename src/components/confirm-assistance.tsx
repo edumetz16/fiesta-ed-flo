@@ -21,7 +21,6 @@ export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invi
         },
         body: JSON.stringify({code, assists, quantity: quantity || invitee.quantity})
       });
-      sendGTMEvent({event: 'assist', code, assists, quantity: quantity || invitee.quantity});
       const data = await response.json();
       setConfirmResponse(data.assists ? 'assists':'no-assists');
       setShowConfirmResponse(true);
@@ -29,6 +28,7 @@ export const ConfirmAssistance = ({code, invitee}: {code?: string, invitee: Invi
       console.log(error);
       setConfirmResponse('error');
     } finally {
+      sendGTMEvent({event: 'assist', code, assists, quantity: quantity || invitee.quantity});
       setShowConfirm(false);
     }
   }
