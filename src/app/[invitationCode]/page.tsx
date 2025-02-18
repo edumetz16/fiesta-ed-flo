@@ -89,7 +89,7 @@ export default async function Page({params}: {params: Promise<{invitationCode: s
             <div className="space-y-4 text-center">
               <Clock className="w-12 h-12 mx-auto text-[#2C3639]" />
               <h3 className="text-4xl font-bold text-[#2C3639]">Hora</h3>
-              <p className="text-2xl text-[#2C3639]/80">18:30</p>
+              <p className="text-2xl text-[#2C3639]/80">19:00</p>
             </div>
           </Card>
           <Card className="p-6 bg-white/80 backdrop-blur md:col-span-2 lg:col-span-1">
