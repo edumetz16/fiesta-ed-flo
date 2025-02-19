@@ -1,11 +1,12 @@
-import { getItem, setItem } from "./edge";
+import { getConfigValue, saveConfigValue } from "./firestore";
 
 export const getOrUpdateAccessToken = async () => {
-  const access_token = (await getItem(process.env.STORAGE_AT_KEY!)) as string;
-  const expires_at = (await getItem(process.env.STORAGE_EXP_KEY!)) as number;
-  const refresh_token = (await getItem(process.env.STORAGE_RT_KEY!)) as string;
+  const access_token = (await getConfigValue(process.env.STORAGE_AT_KEY!)) as string;
+  const expires_at = (await getConfigValue(process.env.STORAGE_EXP_KEY!)) as number;
+  const refresh_token = (await getConfigValue(process.env.STORAGE_RT_KEY!)) as string;
   if(!access_token || !expires_at || !refresh_token) return null;
 
+  console.log(access_token, expires_at,(new Date()).getTime(), refresh_token);
   if (access_token && expires_at > (new Date()).getTime() && refresh_token) {
     return {
       access_token,
@@ -28,9 +29,9 @@ export const getOrUpdateAccessToken = async () => {
     })
   });
   const data = await response.json();
-  setItem(process.env.STORAGE_AT_KEY!, data.access_token);
-  setItem(process.env.STORAGE_EXP_KEY!, (new Date()).getTime() + data.expires_in * 1000);
-  setItem(process.env.STORAGE_RT_KEY!, data.refresh_token);
+  saveConfigValue(process.env.STORAGE_AT_KEY!, data.access_token);
+  saveConfigValue(process.env.STORAGE_EXP_KEY!, (new Date()).getTime() + data.expires_in * 1000);
+  saveConfigValue(process.env.STORAGE_RT_KEY!, data.refresh_token);
   return data;
 }
 
@@ -50,7 +51,7 @@ export const setAccessToken = async (code: string) => {
   });
 
   const data = await response.json();
-  setItem(process.env.STORAGE_AT_KEY!, data.access_token);
-  setItem(process.env.STORAGE_EXP_KEY!, (new Date()).getTime() + data.expires_in * 1000);
-  setItem(process.env.STORAGE_RT_KEY!, data.refresh_token);
+  saveConfigValue(process.env.STORAGE_AT_KEY!, data.access_token);
+  saveConfigValue(process.env.STORAGE_EXP_KEY!, (new Date()).getTime() + data.expires_in * 1000);
+  saveConfigValue(process.env.STORAGE_RT_KEY!, data.refresh_token);
 }
